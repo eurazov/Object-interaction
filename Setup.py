@@ -127,21 +127,3 @@ class Setup:
             
         w.wait_window()
         return a
-
-class param:
-    def __init__(self, w, i):
-        self.m =Entry(w, width=10)
-        self.m.grid(row=i+1, column=1)
-        self.x =Entry(w, width=10)
-        self.x.grid(row=i+1, column=2)
-        self.y =Entry(w, width=10)
-        self.y.grid(row=i+1, column=3)
-        self.Vx=Entry(w, width=10)
-        self.Vx.insert(0, '0')
-        self.Vx.grid(row=i+1, column=4)
-        self.Vy=Entry(w, width=10)
-        self.Vy.insert(0, '0')
-        self.Vy.grid(row=i+1, column=5)
-        self.r =Entry(w, width=10)
-        self.r.insert(0, '5')
-        self.r.grid(row=i+1, column=6)
