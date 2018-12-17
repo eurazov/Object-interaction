@@ -8,11 +8,13 @@ class Object:
         self.position=p
         self.velocity=v
         self.force=f
-        self.id=canvas.create_oval(np.round(self.position[0])-self.radius, np.round(self.position[1])-self.radius, np.round(self.position[0])+self.radius, np.round(self.position[1])+self.radius, fill="black")
+        self.id=canvas.create_oval(np.round(self.position[0])-self.radius, np.round(self.position[1])-self.radius,
+                                   np.round(self.position[0])+self.radius, np.round(self.position[1])+self.radius,
+                                   fill="black")
 
     def interact(self, obj2):
         d=self.dist(obj2)
-        F=float(self.mass*obj2.mass/(d**2))*10**3
+        F=float(self.mass*obj2.mass/(d**2))*10**2
         force_x=F*(obj2.position[0]-self.position[0])/d
         force_y=F*(obj2.position[1]-self.position[1])/d
         self.force+=np.array([force_x, force_y], dtype=float)
@@ -25,7 +27,7 @@ class Object:
     def accelerate(self, dt):
         self.velocity+=self.force*dt/self.mass
 
-    def collision(self, b):
+    def collision(self, b, canvas):
         r=self.radius+b.radius>=self.dist(b)
         if not r:
             return r
@@ -34,6 +36,10 @@ class Object:
         self.radius = np.round((self.radius ** 3 + b.radius ** 3) ** (1. / 3))
         self.position += b.position
         self.position /= 2
+        canvas.delete(self.id)
+        self.id = canvas.create_oval(np.round(self.position[0]) - self.radius, np.round(self.position[1]) - self.radius,
+                                     np.round(self.position[0]) + self.radius, np.round(self.position[1]) + self.radius,
+                                     fill="black")
         return r
 
     def dist(self, obj2):

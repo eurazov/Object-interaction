@@ -9,11 +9,11 @@ class Field:
         self.root.geometry("500x500")
         self.root.resizable(True, True)
         self.canvas = Canvas(self.root, bg="white", state=DISABLED)
-        #self.canvas.pack(fill="both", expand=True)
         self.setup = Setup(self.root, self.canvas)
         self.stop=False
         self.dt=0.1
         self.start()
+        self.root.mainloop()
 
     def close(self):
         self.root.destroy()
@@ -28,7 +28,7 @@ class Field:
         while i < len(self.setup.a):
             j = i + 1
             while j < len(self.setup.a):
-                if self.setup.a[i].collision(self.setup.a[j]):
+                if self.setup.a[i].collision(self.setup.a[j], self.canvas):
                     self.canvas.delete(self.setup.a[j].id)
                     del self.setup.a[j]
                     break

@@ -11,7 +11,6 @@ class Setup:
         self.F = self.initial(root)
         canvas.config(state=NORMAL)
         self.a = self.object_list(root, canvas)
-
     def initial(self, root):
         def get_amount():
             F[0] = float(entry_x.get())
@@ -40,7 +39,7 @@ class Setup:
     
     def object_list(self, root, canvas):
         canvas.pack(fill="both", expand=True)
-        a=[]
+        a=list()
         def start():
             w.destroy()
             
@@ -49,10 +48,12 @@ class Setup:
                 self.n=int(entry.get())
                 for i in range(self.n):
                     m=np.random.randint(1, 5000)
-                    r=np.random.randint(1, 10)
-                    p=np.array(np.random.randint(1, 450, 2), dtype=float)
+                    r=np.random.randint(1, 20)
+                    p=list()
+                    p.append(np.random.randint(1, canvas.winfo_width()))
+                    p.append(np.random.randint(1, canvas.winfo_height()))
                     v=np.array(np.random.randint(1, 50, 2), dtype=float)
-                    a.append(Objects.Object(canvas, m, r, p, v))
+                    a.append(Objects.Object(canvas, m, r, np.array(p, dtype=float), v))
                 canvas.pack(fill="both", expand=True)
                 start()
             np.random.seed(int(time.time()))

@@ -3,4 +3,3 @@ import Field
 
 
 field=Field.Field()
-field.root.mainloop()
